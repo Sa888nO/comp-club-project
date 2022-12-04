@@ -59,7 +59,6 @@ class BuyRequest(Base):
     date = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
 
-# Связанные таблицы
 
 class Employee(Base):
     __tablename__ = "Employees"
@@ -71,18 +70,21 @@ class Employee(Base):
     salary = db.Column(db.Integer, nullable=False)
     status = db.Column(db.String(50), nullable=False)
 
-class User(Base):
-    __tablename__ = "Users"
-    id = db.Column(db.Integer, db.ForeignKey(Employee.id), primary_key=True, nullable=False)
-    login = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
-
 class Computer(Base):
     __tablename__ = 'Computers'
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(50), nullable=False)
     RentTime = db.Column(db.String(50), nullable=False)
 
+
+### не делаем
+class User(Base):
+    __tablename__ = "Users"
+    id = db.Column(db.Integer, db.ForeignKey(Employee.id), primary_key=True, nullable=False)
+    login = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+
+### не делаем
 class ServiceRequest(Base):
     __tablename__ = 'ServiceRequests'
     id = db.Column(db.Integer, primary_key=True)
