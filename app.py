@@ -21,6 +21,7 @@ from models import *
 
 Base.metadata.create_all(bind=engine)
 
+# Cleaning
 @app.route('/api/cleaning', methods=['GET'])
 def get_cleaning_list():
     CleaningRequests = CleaningRequest.query.all()
@@ -40,11 +41,68 @@ def add_new_cleaning():
     session.commit()
     return {'massage': 'Новая заявка на уборку создана'}, 200
 
+# Marketing
+@app.route('/api/marketing', methods=['GET'])
+def get_marketing_list():
+    MarketingOffer = MarketingOffer.query.all()
+    serialized = []
+    for MarketingOfferItem in MarketingOffer: 
+        serialized.append({
+            'id': MarketingOfferItem.id,
+            'information': MarketingOfferItem.information,
+            'status': MarketingOfferItem.status,
+        })
+    return jsonify(serialized)
 
+@app.route('/api/marketing', methods=['POST'])
+def add_new_marketing():
+    new_marketing = MarketingOffer(**request.json)
+    session.add(new_marketing)
+    session.commit()
+    return {'massage': 'Заявка на продажу создана'}, 200
 
+# Storage
+@app.route('/api/storage', methods=['GET'])
+def get_storage_list():
+    StorageItem =  StorageItem.query.all()
+    serialized = []
+    for StorageItemItem in StorageItem: 
+        serialized.append({
+            'id': StorageItemItem.id,
+            'itemName': StorageItemItem.itemName,
+            'count': StorageItemItem.count,
+        })
+    return jsonify(serialized)
 
+@app.route('/api/storage', methods=['POST'])
+def add_new_storage():
+    new_storage = StorageItem(**request.json)
+    session.add(new_storage)
+    session.commit()
+    return {'massage': 'Предмет в хранилище добавлен'}, 200
 
+# Income
+@app.route('/api/income', methods=['GET'])
+def get_income_list():
+    IncomeItem =  IncomeItem.query.all()
+    serialized = []
+    for IncomeItemItem in IncomeItem: 
+        serialized.append({
+            'id': IncomeItemItem.id,
+            'incomeType': IncomeItemItem.incomeType,
+            'money': IncomeItemItem.money,
+            'date': IncomeItemItem.date,
+        })
+    return jsonify(serialized)
 
+@app.route('/api/income', methods=['POST'])
+def add_new_income():
+    new_income = IncomeItem(**request.json)
+    session.add(new_income)
+    session.commit()
+    return {'massage': 'Новый предмет поступил'}, 200
+
+    
     
     # serialized = {
     #     'user_id': new_subscribe.user_id,
