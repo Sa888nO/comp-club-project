@@ -44,9 +44,9 @@ def add_new_cleaning():
 # Marketing
 @app.route('/api/marketing', methods=['GET'])
 def get_marketing_list():
-    MarketingOffer = MarketingOffer.query.all()
+    MarketingOffers = MarketingOffer.query.all()
     serialized = []
-    for MarketingOfferItem in MarketingOffer: 
+    for MarketingOfferItem in MarketingOffers: 
         serialized.append({
             'id': MarketingOfferItem.id,
             'information': MarketingOfferItem.information,
@@ -64,9 +64,9 @@ def add_new_marketing():
 # Storage
 @app.route('/api/storage', methods=['GET'])
 def get_storage_list():
-    StorageItem =  StorageItem.query.all()
+    StorageItems =  StorageItem.query.all()
     serialized = []
-    for StorageItemItem in StorageItem: 
+    for StorageItemItem in StorageItems: 
         serialized.append({
             'id': StorageItemItem.id,
             'itemName': StorageItemItem.itemName,
@@ -84,9 +84,9 @@ def add_new_storage():
 # Income
 @app.route('/api/income', methods=['GET'])
 def get_income_list():
-    IncomeItem =  IncomeItem.query.all()
+    IncomeItems =  IncomeItem.query.all()
     serialized = []
-    for IncomeItemItem in IncomeItem: 
+    for IncomeItemItem in IncomeItems: 
         serialized.append({
             'id': IncomeItemItem.id,
             'incomeType': IncomeItemItem.incomeType,
@@ -102,7 +102,19 @@ def add_new_income():
     session.commit()
     return {'massage': 'Новый предмет поступил'}, 200
 
-    
+@app.route('/api/employee', methods=['POST'])
+def add_new_employee():
+    new_employee = Employee(**request.json)
+    session.add(new_employee)
+    session.commit()
+    return {'massage': 'Создан новый работник'}, 200
+
+@app.route('/api/buyrequest', methods=['POST'])
+def add_new_buy_request():
+    new_buy_request = BuyRequest(**request.json)
+    session.add(new_buy_request)
+    session.commit()
+    return {'massage': 'Создана новая заявка на закупку'}, 200
     
     # serialized = {
     #     'user_id': new_subscribe.user_id,
