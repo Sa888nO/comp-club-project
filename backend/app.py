@@ -39,7 +39,7 @@ def add_new_cleaning():
     new_cleaning = CleaningRequest(**request.json)
     session.add(new_cleaning)
     session.commit()
-    return {'massage': 'Новая заявка на уборку создана'}, 200
+    return {'massage': 'Заявка на уборку создана'}, 200
 
 # Marketing
 @app.route('/api/marketing', methods=['GET'])
@@ -100,22 +100,166 @@ def add_new_income():
     new_income = IncomeItem(**request.json)
     session.add(new_income)
     session.commit()
-    return {'massage': 'Новый предмет поступил'}, 200
+    return {'massage': 'Новый доход поступил'}, 200
 
-@app.route('/api/employee', methods=['POST'])
-def add_new_employee():
-    new_employee = Employee(**request.json)
-    session.add(new_employee)
+#RateItem
+@app.route('/api/rateitem', methods=['GET'])
+def get_rateitem_list():
+    RateItems = RateItem.query.all()
+    serialized = []
+    for RateItemItem in RateItems: 
+        serialized.append({
+            'id': RateItemItem.id,
+            'rateType': RateItemItem.rateType,
+            'money': RateItemItem.money,
+            'date': RateItemItem.date,
+        })
+    return jsonify(serialized)
+
+@app.route('/api/rateitem', methods=['POST'])
+def all_new_rateitem():
+    new_RateItem = RateItem(**request.json)
+    session.add(new_RateItem)
     session.commit()
-    return {'massage': 'Создан новый работник'}, 200
+    return {'massage': 'Новый расход поступил'}
+
+#ProviderOffer (Предложение от поставщика)
+@app.route('/api/provideroffer', methods=['GET'])
+def get_provideroffer_list():
+    ProviderOfferItems = ProviderOffer.query.all()
+    serialized = []
+    for ProviderOfferItem in ProviderOfferItems: 
+        serialized.append({
+            'id': ProviderOfferItem.id,
+            'description': ProviderOfferItem.description,
+            'price': ProviderOfferItem.price,
+            'status': ProviderOfferItem.status,
+        })
+    return jsonify(serialized)
+
+@app.route('/api/provideroffer', methods=['POST'])
+def all_new_provideroffer():
+    new_providerOffer = ProviderOffer(**request.json)
+    session.add(new_providerOffer)
+    session.commit()
+    return {'massage': 'Новое предложение от поставщика поступило'}
+
+#BuyRequest (запрос на закупку)
+@app.route('/api/buyrequest', methods=['GET'])
+def get_buy_request_list():
+    BuyRequests = BuyRequest.query.all()
+    serialized = []
+    for BuyRequestsItem in BuyRequests: 
+        serialized.append({
+            'id': BuyRequestsItem.id,
+            'department': BuyRequestsItem.department,
+            'description': BuyRequestsItem.description,
+            'date': BuyRequestsItem.date,
+            'status': BuyRequestsItem.status,
+        })
+    return jsonify(serialized)
 
 @app.route('/api/buyrequest', methods=['POST'])
 def add_new_buy_request():
     new_buy_request = BuyRequest(**request.json)
     session.add(new_buy_request)
     session.commit()
-    return {'massage': 'Создана новая заявка на закупку'}, 200
+    return {'massage': 'Создана новая заявка на закупку'}
     
+# Employee
+@app.route('/api/employee', methods=['GET'])
+def get_employee_list():
+    employeeItems =  Employee.query.all()
+    serialized = []
+    for employeeItem in employeeItems: 
+        serialized.append({
+            'id': employeeItem.id,
+            'name': employeeItem.name,
+            'surname': employeeItem.surname,
+            'userType': employeeItem.userType,
+            'description': employeeItem.description,
+            'salary': employeeItem.salary,
+            'status': employeeItem.status,
+        })
+    return jsonify(serialized)
+
+@app.route('/api/employee', methods=['POST'])
+def add_new_employee():
+    new_employee = Employee(**request.json)
+    session.add(new_employee)
+    session.commit()
+    return {'massage': 'Создан новый работник'}
+
+#Computer
+@app.route('/api/сomputer', methods=['GET'])
+def get_сomputer_list():
+    сomputerItems =  Computer.query.all()
+    serialized = []
+    for сomputerItem in сomputerItems: 
+        serialized.append({
+            'id': сomputerItem.id,
+            'status': сomputerItem.status,
+            'information': сomputerItem.information, 
+            'location': сomputerItem.location,
+            'RentTime': сomputerItem.RentTime,
+        })
+    return jsonify(serialized)
+
+@app.route('/api/сomputer', methods=['POST'])
+def add_new_сomputer():
+    new_сomputer = Computer(**request.json)
+    session.add(new_сomputer)
+    session.commit()
+    return {'massage': 'Создан новый Компьютер'}
+
+#ServiceRequest
+@app.route('/api/servicerequest', methods=['GET'])
+def get_servicerequest_list():
+    ServiceRequests =  ServiceRequest.query.all()
+    serialized = []
+    for ServiceRequestItem in ServiceRequests: 
+        serialized.append({
+            'id': ServiceRequestItem.id,
+            'computer_id': ServiceRequestItem.computer_id,
+            'description': ServiceRequestItem.description, 
+            'status': ServiceRequestItem.status,
+        })
+    return jsonify(serialized)
+
+@app.route('/api/servicerequest', methods=['POST'])
+def add_new_servicerequest():
+    new_servicerequest = ServiceRequest(**request.json)
+    session.add(new_servicerequest)
+    session.commit()
+    return {'massage': 'Создана новая заявка на ремонт'}
+
+### САМОЕ ВАЖНОЕ ИЗ ВСЕГО ###
+#User (Логика авторизации)
+@app.route('/api/authorization', methods=['POST'])
+def authorization():
+    user = User(**request.json)
+    item = User.query.filter(
+        User.login.like(user.login),
+        User.password.like(user.password),
+        ).first()
+    if (not item):
+        return {'massage': 'Неверный логин или пароль'}, 400
+    currentUser = Employee.query.filter(
+        Employee.id.like(item.id)
+    ).first()
+    serialized = {
+        'id': currentUser.id,
+        'name': currentUser.name,
+        'surname': currentUser.surname,
+        'userType': currentUser.userType,
+        'description': currentUser.description,
+        'salary': currentUser.salary,
+        'status': currentUser.status, 
+    }
+    return jsonify(serialized)
+
+# мусор
+
     # serialized = {
     #     'user_id': new_subscribe.user_id,
     #     'lesson_id': new_subscribe.lesson_id
@@ -139,7 +283,7 @@ def add_new_buy_request():
 #     }
 #     return jsonify(serialized)
 
-# # api /api/authorization
+# api /api/authorization
 # @app.route('/api/authorization', methods=['POST'])
 # def authorization():
 #     user = User(**request.json)

@@ -1,17 +1,5 @@
 from app import db, session, Base 
 
-# Не связанные таблицы
-# ВАЖНО 1)
-# (date - string) это упростит в дальнейшем моменты на фронте пишем в формате:
-# день:месяц:год:час:минута ПРИМЕР:
-# 04:12:2022:15:20 возможно в дальнейшем поменяем логику - date в sqlite работает странно :( 
-
-# ВАЖНО 2)
-# (status - string) можно в теории поменять в числа:
-# но строки удобнее для отображения на фронте типо (В работе, Завершено, Отклонено и прочее)
-# надо будет для каждой таблицы со статусом подумать и сделать по ним валидацию
-
-
 class CleaningRequest(Base):
     __tablename__ = 'CleaningRequests'
     id = db.Column(db.Integer, primary_key=True)
@@ -59,7 +47,6 @@ class BuyRequest(Base):
     date = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
 
-
 class Employee(Base):
     __tablename__ = "Employees"
     id = db.Column(db.Integer, primary_key=True)
@@ -74,17 +61,16 @@ class Computer(Base):
     __tablename__ = 'Computers'
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(50), nullable=False)
+    information = db.Column(db.String(200), nullable=False)
+    location = db.Column(db.String(200), nullable=False)
     RentTime = db.Column(db.String(50), nullable=False)
 
-
-### не делаем
 class User(Base):
     __tablename__ = "Users"
     id = db.Column(db.Integer, db.ForeignKey(Employee.id), primary_key=True, nullable=False)
     login = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
 
-### не делаем
 class ServiceRequest(Base):
     __tablename__ = 'ServiceRequests'
     id = db.Column(db.Integer, primary_key=True)
