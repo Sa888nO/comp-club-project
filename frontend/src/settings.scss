@@ -1,5 +1,55 @@
 * {
-	margin: 0;
-	padding: 0;
 	box-sizing: border-box;
 }
+body {
+	margin: 0;
+	padding: 0;
+	min-width: 100vw;
+	min-height: 100vh;
+	background-color: rgb(252, 254, 255);
+}
+
+button {
+	cursor: pointer;
+}
+
+// .ant-message-notice-content {
+// 	background: linear-gradient(135deg, #3b3f44 13%, #2e3036 87.5%);
+// 	box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.5);
+// 	border-radius: 8px;
+// 	padding: 16px 24px;
+// 	font-weight: bold;
+// 	.ant-message-error {
+// 		display: flex;
+// 		align-items: center;
+// 		font-weight: 400;
+// 		font-size: 14px;
+// 		line-height: 24px;
+// 		color: #fefefe;
+// 		.anticon {
+// 			color: #f86262;
+// 		}
+// 	}
+// 	.ant-message-info {
+// 		display: flex;
+// 		align-items: center;
+// 		font-weight: 400;
+// 		font-size: 14px;
+// 		line-height: 24px;
+// 		color: #fefefe;
+// 		.anticon {
+// 			color: #00d98b;
+// 		}
+// 	}
+// 	.ant-message-success {
+// 		display: flex;
+// 		align-items: center;
+// 		font-weight: 400;
+// 		font-size: 14px;
+// 		line-height: 24px;
+// 		color: #fefefe;
+// 		.anticon {
+// 			color: #00d98b;
+// 		}
+// 	}
+// }

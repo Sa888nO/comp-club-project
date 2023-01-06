@@ -1,12 +1,11 @@
-import { Footer } from "@components/Footer";
+import AuthPage from "@pages/AuthPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Footer />} />
-				<Route path="*" element={<>404</>} />
+				<Route path="/" element={<AuthPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
