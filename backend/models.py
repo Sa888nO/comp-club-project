@@ -74,6 +74,6 @@ class User(Base):
 class ServiceRequest(Base):
     __tablename__ = 'ServiceRequests'
     id = db.Column(db.Integer, primary_key=True)
-    computer_id = db.Column(db.Integer, db.ForeignKey(Computer.id), primary_key=True, nullable=False)
+    computer_id = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(500), nullable=False)
     status = db.Column(db.String(50), nullable=False)

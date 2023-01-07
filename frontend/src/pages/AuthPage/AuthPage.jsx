@@ -8,9 +8,6 @@ import styles from "./AuthPage.module.scss";
 
 const AuthPage = () => {
 	const user = useSelector((state) => state.auth.user);
-	console.log("user", user);
-	const emp = useSelector((state) => state.employee.employees);
-	console.log(emp);
 	const RefLogin = useRef(null);
 	const RefPassword = useRef(null);
 	const dispatch = useDispatch();

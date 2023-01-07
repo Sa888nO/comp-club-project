@@ -1,0 +1,15 @@
+.content {
+	padding: 10px;
+}
+.controllerButtons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.subButtons {
+	flex-wrap: wrap;
+	display: flex;
+	gap: 5px;
+}

@@ -1,10 +1,15 @@
 import {
+	CREATE_CLEAN_REQUEST,
+	CREATE_NEW_COMPUTER,
+	CREATE_SERVICE_REQUEST,
+	GET_ALL_CLEAN_REQUESTS,
 	GET_ALL_COMPUTERS,
 	GET_ALL_EMPLOYEES,
 	LOGIN,
 	LOG_OUT,
 	SET_ALL_COMPUTERS,
 	SET_ALL_EMPLOYEES,
+	SET_CLEAN_REQUESTS,
 	SET_USER,
 } from "../constants";
 
@@ -34,5 +39,28 @@ export const getAllComputers = () => ({
 });
 export const setAllComputers = (payload) => ({
 	type: SET_ALL_COMPUTERS,
+	payload,
+});
+export const createNewComputer = (payload) => ({
+	type: CREATE_NEW_COMPUTER,
+	payload,
+});
+
+export const CreateCleanRequest = (payload) => ({
+	type: CREATE_CLEAN_REQUEST,
+	payload,
+});
+
+export const CreateServiceRequest = (payload) => ({
+	type: CREATE_SERVICE_REQUEST,
+	payload,
+});
+
+export const getAllCleanRequests = () => ({
+	type: GET_ALL_CLEAN_REQUESTS,
+});
+
+export const setAllCleansRequests = (payload) => ({
+	type: SET_CLEAN_REQUESTS,
 	payload,
 });
