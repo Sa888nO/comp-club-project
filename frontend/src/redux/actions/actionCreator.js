@@ -1,4 +1,5 @@
 import {
+	CLOSE_CLEAN_REQUEST,
 	CREATE_CLEAN_REQUEST,
 	CREATE_NEW_COMPUTER,
 	CREATE_SERVICE_REQUEST,
@@ -62,5 +63,10 @@ export const getAllCleanRequests = () => ({
 
 export const setAllCleansRequests = (payload) => ({
 	type: SET_CLEAN_REQUESTS,
+	payload,
+});
+
+export const closeCleanRequest = (payload) => ({
+	type: CLOSE_CLEAN_REQUEST,
 	payload,
 });

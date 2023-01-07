@@ -54,6 +54,7 @@ const AdministratorPage = () => {
 						</Button>
 					</div>
 				</div>
+				<div className={styles.title}>Список всех компьютеров</div>
 				{computers.map((item) => (
 					<div>{item.information}</div>
 				))}

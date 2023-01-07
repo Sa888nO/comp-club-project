@@ -1,4 +1,7 @@
 .content {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 	padding: 10px;
 }
 .controllerButtons {
@@ -12,4 +15,10 @@
 	flex-wrap: wrap;
 	display: flex;
 	gap: 5px;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 22px;
+	text-align: center;
 }

@@ -39,7 +39,21 @@ def add_new_cleaning():
     new_cleaning = CleaningRequest(**request.json)
     session.add(new_cleaning)
     session.commit()
-    return {'message': 'Заявка на уборку создана'}, 200
+    return {'message': 'Заявка на уборку создана'}, 
+
+@app.route('/api/updatecleaning', methods=['POST'])
+def update_cleaning():
+    new_cleaning = CleaningRequest(**request.json)
+    old_cleaning = CleaningRequest.query.filter(
+    CleaningRequest.id.like(new_cleaning.id)
+    ).first()
+    if not old_cleaning:
+    	return {message: 'Такой записи нет'}, 500
+    session.delete(old_cleaning)
+    session.add(new_cleaning)
+    session.commit()
+    return {'message': 'Заявка на уборку закрыта'}, 200
+
 
 # Marketing
 @app.route('/api/marketing', methods=['GET'])

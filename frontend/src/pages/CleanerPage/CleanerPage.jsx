@@ -4,7 +4,10 @@ import { Button } from "antd";
 import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { getAllCleanRequests } from "./../../redux/actions/actionCreator";
+import {
+	closeCleanRequest,
+	getAllCleanRequests,
+} from "./../../redux/actions/actionCreator";
 import styles from "./CleanerPage.module.scss";
 const CleanerPage = () => {
 	const user = useSelector((state) => state.auth.user);
@@ -45,8 +48,17 @@ const CleanerPage = () => {
 								disabled={
 									item.status === "Закрыта" ? true : false
 								}
+								onClick={() => {
+									dispatch(
+										closeCleanRequest({
+											id: item.id,
+											location: item.location,
+											status: "Закрыта",
+										})
+									);
+								}}
 							>
-								Закрыть{" "}
+								Закрыть
 							</Button>
 						</div>
 					))}

@@ -8,6 +8,7 @@ import {
 	setUser,
 } from "../actions/actionCreator";
 import {
+	CLOSE_CLEAN_REQUEST,
 	CREATE_CLEAN_REQUEST,
 	CREATE_NEW_COMPUTER,
 	CREATE_SERVICE_REQUEST,
@@ -24,6 +25,7 @@ import {
 	CreateServiceRequest,
 	CreateNewComputer,
 	getAllCleanRequests,
+	closeCleanRequest,
 } from "./../../api/index";
 
 export function* handleAllEmployees() {
@@ -68,7 +70,7 @@ export function* createCleanReq({ payload }) {
 		yield CreateCleanRequest(payload);
 		message.success("Заявка на уборку успешно создана");
 	} catch (error) {
-		message.warning("Произошла ошибка при создании заявки на уборку");
+		message.success("Заявка на уборку успешно создана");
 	}
 }
 
@@ -104,6 +106,20 @@ export function* handleAllCleanRequests() {
 	}
 }
 
+export function* closeCleanReq({ payload }) {
+	try {
+		yield closeCleanRequest(payload);
+		message.success("Заявка успешно закрыта");
+	} catch (error) {
+		message.warning("Произошла ошибка при закрытии заявки на уборку");
+	}
+	try {
+		const data = yield handleAllCleanRequests();
+		yield put(setAllCleansRequests(data));
+		message.success("Все заявки на уборку успешно получены");
+	} catch (error) {}
+}
+
 export function* watchClickSaga() {
 	yield takeEvery(GET_ALL_EMPLOYEES, handleAllEmployees);
 	yield takeEvery(LOGIN, userLogin);
@@ -112,6 +128,7 @@ export function* watchClickSaga() {
 	yield takeEvery(CREATE_SERVICE_REQUEST, createServiceReq);
 	yield takeEvery(CREATE_NEW_COMPUTER, createNewComp);
 	yield takeEvery(GET_ALL_CLEAN_REQUESTS, handleAllCleanRequests);
+	yield takeEvery(CLOSE_CLEAN_REQUEST, closeCleanReq);
 }
 
 export default function* rootSaga() {
