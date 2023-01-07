@@ -1,6 +1,9 @@
 import {
+	GET_ALL_COMPUTERS,
 	GET_ALL_EMPLOYEES,
 	LOGIN,
+	LOG_OUT,
+	SET_ALL_COMPUTERS,
 	SET_ALL_EMPLOYEES,
 	SET_USER,
 } from "../constants";
@@ -20,5 +23,16 @@ export const login = (payload) => ({
 });
 export const setUser = (payload) => ({
 	type: SET_USER,
+	payload,
+});
+export const logout = () => ({
+	type: LOG_OUT,
+});
+
+export const getAllComputers = () => ({
+	type: GET_ALL_COMPUTERS,
+});
+export const setAllComputers = (payload) => ({
+	type: SET_ALL_COMPUTERS,
 	payload,
 });
