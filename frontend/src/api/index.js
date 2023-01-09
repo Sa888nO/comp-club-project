@@ -67,3 +67,19 @@ export const closeCleanRequest = async (data) => {
 	});
 	return await request.json();
 };
+
+export const getAllServiceRequests = async () => {
+	const request = await fetch("http://127.0.0.1:5000/api/servicerequest");
+	return await request.json();
+};
+
+export const closeServiceRequest = async (data) => {
+	const request = await fetch("http://127.0.0.1:5000/api/updateservice", {
+		method: "post",
+		body: JSON.stringify(data),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	return await request.json();
+};

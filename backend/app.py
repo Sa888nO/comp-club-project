@@ -247,6 +247,19 @@ def add_new_servicerequest():
     session.commit()
     return {'message': 'Создана новая заявка на ремонт'}
 
+@app.route('/api/updateservice', methods=['POST'])
+def update_service():
+    new_service = ServiceRequest(**request.json)
+    old_service = ServiceRequest.query.filter(
+    ServiceRequest.id.like(new_service.id)
+    ).first()
+    if not old_service:
+    	return {message: 'Такой записи нет'}, 500
+    session.delete(old_service)
+    session.add(new_service)
+    session.commit()
+    return {'message': 'Заявка на ремонт закрыта'}, 200
+
 ### САМОЕ ВАЖНОЕ ИЗ ВСЕГО ###
 #User (Логика авторизации)
 @app.route('/api/authorization', methods=['POST'])

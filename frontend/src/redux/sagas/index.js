@@ -5,16 +5,19 @@ import {
 	setAllCleansRequests,
 	setAllComputers,
 	setAllEmployees,
+	setAllServiceRequests,
 	setUser,
 } from "../actions/actionCreator";
 import {
 	CLOSE_CLEAN_REQUEST,
+	CLOSE_SERVICE_REQUEST,
 	CREATE_CLEAN_REQUEST,
 	CREATE_NEW_COMPUTER,
 	CREATE_SERVICE_REQUEST,
 	GET_ALL_CLEAN_REQUESTS,
 	GET_ALL_COMPUTERS,
 	GET_ALL_EMPLOYEES,
+	GET_ALL_SERVICE_REQUESTS,
 	LOGIN,
 } from "../constants";
 import {
@@ -26,6 +29,8 @@ import {
 	CreateNewComputer,
 	getAllCleanRequests,
 	closeCleanRequest,
+	getAllServiceRequests,
+	closeServiceRequest,
 } from "./../../api/index";
 
 export function* handleAllEmployees() {
@@ -120,6 +125,30 @@ export function* closeCleanReq({ payload }) {
 	} catch (error) {}
 }
 
+export function* handleAllServiceRequests() {
+	try {
+		const data = yield getAllServiceRequests();
+		yield put(setAllServiceRequests(data));
+		message.success("Все заявки на ремонт успешно получены");
+	} catch (error) {
+		message.warning("Произошла ошибка при получении всех заявок на ремонт");
+	}
+}
+
+export function* closeServiceReq({ payload }) {
+	try {
+		yield closeServiceRequest(payload);
+		message.success("Заявка успешно закрыта");
+	} catch (error) {
+		message.warning("Произошла ошибка при закрытии заявки на ремонт");
+	}
+	try {
+		const data = yield handleAllServiceRequests();
+		yield put(setAllServiceRequests(data));
+		message.success("Все заявки на ремонт успешно получены");
+	} catch (error) {}
+}
+
 export function* watchClickSaga() {
 	yield takeEvery(GET_ALL_EMPLOYEES, handleAllEmployees);
 	yield takeEvery(LOGIN, userLogin);
@@ -129,6 +158,8 @@ export function* watchClickSaga() {
 	yield takeEvery(CREATE_NEW_COMPUTER, createNewComp);
 	yield takeEvery(GET_ALL_CLEAN_REQUESTS, handleAllCleanRequests);
 	yield takeEvery(CLOSE_CLEAN_REQUEST, closeCleanReq);
+	yield takeEvery(GET_ALL_SERVICE_REQUESTS, handleAllServiceRequests);
+	yield takeEvery(CLOSE_SERVICE_REQUEST, closeServiceReq);
 }
 
 export default function* rootSaga() {

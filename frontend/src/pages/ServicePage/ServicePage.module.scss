@@ -1,0 +1,42 @@
+.content {
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 22px;
+	text-align: center;
+}
+
+.cleanRequest {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	gap: 10px;
+	width: 49%;
+	background-color: antiquewhite;
+	padding: 10px 10px;
+	border-radius: 10px;
+}
+.disabled {
+	opacity: 0.5;
+}
+
+.cleanReqBlock {
+	display: flex;
+	gap: 10px;
+	span {
+		font-weight: bold;
+		font-size: 18px;
+	}
+	.compTitle {
+		color: blue;
+		font-weight: bold;
+		font-size: 20px;
+	}
+}
