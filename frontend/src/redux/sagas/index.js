@@ -12,6 +12,7 @@ import {
 	CLOSE_CLEAN_REQUEST,
 	CLOSE_SERVICE_REQUEST,
 	CREATE_CLEAN_REQUEST,
+	CREATE_INCOME,
 	CREATE_NEW_COMPUTER,
 	CREATE_SERVICE_REQUEST,
 	GET_ALL_CLEAN_REQUESTS,
@@ -19,6 +20,7 @@ import {
 	GET_ALL_EMPLOYEES,
 	GET_ALL_SERVICE_REQUESTS,
 	LOGIN,
+	UPDATE_COMP_RENTTIME,
 } from "../constants";
 import {
 	getAllComputers,
@@ -31,6 +33,8 @@ import {
 	closeCleanRequest,
 	getAllServiceRequests,
 	closeServiceRequest,
+	updateCompRentTime,
+	CreatNewIncome,
 } from "./../../api/index";
 
 export function* handleAllEmployees() {
@@ -100,6 +104,19 @@ export function* createNewComp({ payload }) {
 		message.success("Список компьютеров успешно получен");
 	} catch (error) {}
 }
+export function* updateCompRent({ payload }) {
+	try {
+		yield updateCompRentTime(payload);
+		message.success("Аренда проведена");
+	} catch (error) {
+		message.warning("Произошла ошибка при проведении аренды");
+	}
+	try {
+		const data = yield handleAllComputers();
+		yield put(setAllComputers(data));
+		message.success("Список компьютеров успешно получен");
+	} catch (error) {}
+}
 
 export function* handleAllCleanRequests() {
 	try {
@@ -148,6 +165,14 @@ export function* closeServiceReq({ payload }) {
 		message.success("Все заявки на ремонт успешно получены");
 	} catch (error) {}
 }
+export function* CreateIncome({ payload }) {
+	try {
+		yield CreatNewIncome(payload);
+		message.success("Оплата проведена");
+	} catch (error) {
+		message.warning("Оплата прошла с ошибкой");
+	}
+}
 
 export function* watchClickSaga() {
 	yield takeEvery(GET_ALL_EMPLOYEES, handleAllEmployees);
@@ -160,6 +185,8 @@ export function* watchClickSaga() {
 	yield takeEvery(CLOSE_CLEAN_REQUEST, closeCleanReq);
 	yield takeEvery(GET_ALL_SERVICE_REQUESTS, handleAllServiceRequests);
 	yield takeEvery(CLOSE_SERVICE_REQUEST, closeServiceReq);
+	yield takeEvery(UPDATE_COMP_RENTTIME, updateCompRent);
+	yield takeEvery(CREATE_INCOME, CreateIncome);
 }
 
 export default function* rootSaga() {

@@ -28,6 +28,16 @@ export const CreateNewComputer = async (data) => {
 	});
 	return await request.json();
 };
+export const updateCompRentTime = async (data) => {
+	const request = await fetch("http://127.0.0.1:5000/api/updatecomputer", {
+		method: "post",
+		body: JSON.stringify(data),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	return await request.json();
+};
 
 export const CreateCleanRequest = async (data) => {
 	const request = await fetch("http://127.0.0.1:5000/api/cleaning", {
@@ -79,6 +89,18 @@ export const closeServiceRequest = async (data) => {
 		body: JSON.stringify(data),
 		headers: {
 			"Content-Type": "application/json",
+		},
+	});
+	return await request.json();
+};
+
+export const CreatNewIncome = async (data) => {
+	const request = await fetch("http://127.0.0.1:5000/api/income", {
+		method: "post",
+		body: JSON.stringify(data),
+		headers: {
+			"Content-Type": "application/json",
+			CORS: "no-cors",
 		},
 	});
 	return await request.json();

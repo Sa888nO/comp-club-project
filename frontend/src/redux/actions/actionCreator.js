@@ -2,6 +2,7 @@ import {
 	CLOSE_CLEAN_REQUEST,
 	CLOSE_SERVICE_REQUEST,
 	CREATE_CLEAN_REQUEST,
+	CREATE_INCOME,
 	CREATE_NEW_COMPUTER,
 	CREATE_SERVICE_REQUEST,
 	GET_ALL_CLEAN_REQUESTS,
@@ -15,6 +16,7 @@ import {
 	SET_CLEAN_REQUESTS,
 	SET_SERVICE_REQUESTS,
 	SET_USER,
+	UPDATE_COMP_RENTTIME,
 } from "../constants";
 
 export const getAllEmployees = () => ({
@@ -47,6 +49,10 @@ export const setAllComputers = (payload) => ({
 });
 export const createNewComputer = (payload) => ({
 	type: CREATE_NEW_COMPUTER,
+	payload,
+});
+export const updateCompTime = (payload) => ({
+	type: UPDATE_COMP_RENTTIME,
 	payload,
 });
 
@@ -84,5 +90,10 @@ export const setAllCleansRequests = (payload) => ({
 
 export const closeCleanRequest = (payload) => ({
 	type: CLOSE_CLEAN_REQUEST,
+	payload,
+});
+
+export const creatIncome = (payload) => ({
+	type: CREATE_INCOME,
 	payload,
 });

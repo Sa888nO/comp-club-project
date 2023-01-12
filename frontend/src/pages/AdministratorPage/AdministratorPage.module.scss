@@ -22,3 +22,28 @@
 	font-size: 22px;
 	text-align: center;
 }
+
+.computers {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.comp {
+	width: 32%;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 20px;
+	padding: 6px;
+	border-radius: 6px;
+	background-color: rgb(206, 255, 199);
+}
+.compIsClose {
+	background-color: rgb(255, 199, 199);
+}
+
+.infoBlock {
+	width: 100%;
+}

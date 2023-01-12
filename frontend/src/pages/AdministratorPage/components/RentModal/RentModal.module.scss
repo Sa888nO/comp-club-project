@@ -1,0 +1,12 @@
+.warn {
+	color: red;
+}
+
+.inputBlockNum {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	.inputNum {
+		width: 30%;
+	}
+}

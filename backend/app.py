@@ -219,6 +219,19 @@ def get_сomputer_list():
         })
     return jsonify(serialized)
 
+@app.route('/api/updatecomputer', methods=['POST'])
+def update_comp():
+    new_comp = Computer(**request.json)
+    old_comp = Computer.query.filter(
+    Computer.id.like(new_comp.id)
+    ).first()
+    if not old_comp:
+    	return {message: 'Такого компьютера нет'}, 500
+    session.delete(old_comp)
+    session.add(new_comp)
+    session.commit()
+    return {'message': 'Время аренды компьютера обновлено'}, 200
+
 @app.route('/api/сomputer', methods=['POST'])
 def add_new_сomputer():
     new_сomputer = Computer(**request.json)

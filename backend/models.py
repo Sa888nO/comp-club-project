@@ -44,36 +44,36 @@ class BuyRequest(Base):
     id = db.Column(db.Integer, primary_key=True)
     department = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    date = db.Column(db.String(50), nullable=False)
-    status = db.Column(db.String(50), nullable=False)
+    date = db.Column(db.String(200), nullable=False)
+    status = db.Column(db.String(200), nullable=False)
 
 class Employee(Base):
     __tablename__ = "Employees"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    surname = db.Column(db.String(50), nullable=False)
-    userType = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
+    surname = db.Column(db.String(200), nullable=False)
+    userType = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     salary = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(200), nullable=False)
 
 class Computer(Base):
     __tablename__ = 'Computers'
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(200), nullable=False)
     information = db.Column(db.String(200), nullable=False)
     location = db.Column(db.String(200), nullable=False)
-    RentTime = db.Column(db.String(50), nullable=False)
+    RentTime = db.Column(db.String(200), nullable=False)
 
 class User(Base):
     __tablename__ = "Users"
     id = db.Column(db.Integer, db.ForeignKey(Employee.id), primary_key=True, nullable=False)
-    login = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    login = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
 
 class ServiceRequest(Base):
     __tablename__ = 'ServiceRequests'
     id = db.Column(db.Integer, primary_key=True)
     computer_id = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    status = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(200), nullable=False)
