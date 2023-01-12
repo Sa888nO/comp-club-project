@@ -105,3 +105,8 @@ export const CreatNewIncome = async (data) => {
 	});
 	return await request.json();
 };
+
+export const GetAllIncomes = async () => {
+	const request = await fetch("http://127.0.0.1:5000/api/income");
+	return await request.json();
+};

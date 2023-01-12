@@ -5,6 +5,7 @@ import {
 	setAllCleansRequests,
 	setAllComputers,
 	setAllEmployees,
+	setAllIncomes,
 	setAllServiceRequests,
 	setUser,
 } from "../actions/actionCreator";
@@ -18,6 +19,7 @@ import {
 	GET_ALL_CLEAN_REQUESTS,
 	GET_ALL_COMPUTERS,
 	GET_ALL_EMPLOYEES,
+	GET_ALL_INCOME,
 	GET_ALL_SERVICE_REQUESTS,
 	LOGIN,
 	UPDATE_COMP_RENTTIME,
@@ -35,13 +37,14 @@ import {
 	closeServiceRequest,
 	updateCompRentTime,
 	CreatNewIncome,
+	GetAllIncomes,
 } from "./../../api/index";
 
 export function* handleAllEmployees() {
 	try {
 		const data = yield getAllEmployees();
 		yield put(setAllEmployees(data));
-		message.success("ок");
+		message.success("Список всех сотрудников успешно получен");
 	} catch (error) {
 		message.warning("Произошла ошибка при получении всех сотрудников");
 	}
@@ -174,6 +177,16 @@ export function* CreateIncome({ payload }) {
 	}
 }
 
+export function* handleAllIncome() {
+	try {
+		const data = yield GetAllIncomes();
+		yield put(setAllIncomes(data));
+		message.success("Информация о всех доходах получена");
+	} catch (error) {
+		message.warning("Произошла ошибка при получении инфрмации о доходах");
+	}
+}
+
 export function* watchClickSaga() {
 	yield takeEvery(GET_ALL_EMPLOYEES, handleAllEmployees);
 	yield takeEvery(LOGIN, userLogin);
@@ -187,6 +200,7 @@ export function* watchClickSaga() {
 	yield takeEvery(CLOSE_SERVICE_REQUEST, closeServiceReq);
 	yield takeEvery(UPDATE_COMP_RENTTIME, updateCompRent);
 	yield takeEvery(CREATE_INCOME, CreateIncome);
+	yield takeEvery(GET_ALL_INCOME, handleAllIncome);
 }
 
 export default function* rootSaga() {

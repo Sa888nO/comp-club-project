@@ -1,0 +1,42 @@
+.content {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 22px;
+	text-align: center;
+}
+
+.cleanRequest {
+	display: flex;
+	width: 100%;
+	background-color: antiquewhite;
+	padding: 10px 10px;
+	border-radius: 10px;
+	align-items: center;
+	justify-content: space-between;
+	div {
+		width: 33%;
+	}
+}
+.disabled {
+	opacity: 0.5;
+}
+.cleanReqBlock {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	span {
+		font-weight: bold;
+		font-size: 18px;
+	}
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-around;
+}

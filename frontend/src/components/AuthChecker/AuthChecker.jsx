@@ -16,6 +16,9 @@ const AuthChecker = () => {
 	if (userType === "Системный Администратор") {
 		return <Navigate to="/service" />;
 	}
+	if (userType === "Управляющий") {
+		return <Navigate to="/manager" />;
+	}
 	return <></>;
 };
 

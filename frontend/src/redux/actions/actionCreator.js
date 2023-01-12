@@ -8,11 +8,13 @@ import {
 	GET_ALL_CLEAN_REQUESTS,
 	GET_ALL_COMPUTERS,
 	GET_ALL_EMPLOYEES,
+	GET_ALL_INCOME,
 	GET_ALL_SERVICE_REQUESTS,
 	LOGIN,
 	LOG_OUT,
 	SET_ALL_COMPUTERS,
 	SET_ALL_EMPLOYEES,
+	SET_ALL_INCOME,
 	SET_CLEAN_REQUESTS,
 	SET_SERVICE_REQUESTS,
 	SET_USER,
@@ -85,6 +87,14 @@ export const getAllCleanRequests = () => ({
 
 export const setAllCleansRequests = (payload) => ({
 	type: SET_CLEAN_REQUESTS,
+	payload,
+});
+
+export const getAllIncomes = () => ({
+	type: GET_ALL_INCOME,
+});
+export const setAllIncomes = (payload) => ({
+	type: SET_ALL_INCOME,
 	payload,
 });
 
