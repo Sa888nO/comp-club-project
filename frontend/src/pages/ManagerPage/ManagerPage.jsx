@@ -30,12 +30,13 @@ const ManagerPage = () => {
 	return (
 		<div className={styles.wrapper}>
 			<Header />
-			<div className={styles.buttons}>
+			{/* <div className={styles.buttons}>
 				<Button>Информация о сотрудниках</Button>
 				<Button>Информация о доходах</Button>
-			</div>
+			</div> */}
 			<div className={styles.content}>
-				{currentBlock ? <Incomes /> : <Employeess />}
+				<Incomes />
+				<Employeess />
 			</div>
 		</div>
 	);
