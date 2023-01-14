@@ -9,6 +9,9 @@ import styles from "./NewCompModal.module.scss";
 const NewCompModal = ({ isModalOpen, setIsModalOpen }) => {
 	const inputInformation = useRef(null);
 	const inputLocation = useRef(null);
+	const cpu = useRef(null);
+	const ozu = useRef(null);
+	const video = useRef(null);
 	const dispatch = useDispatch();
 
 	const handleOk = () => {
@@ -18,7 +21,13 @@ const NewCompModal = ({ isModalOpen, setIsModalOpen }) => {
 			inputInformation !== null &&
 			inputLocation !== null &&
 			inputInformation.current?.resizableTextArea.textArea.value !== "" &&
-			inputLocation.current?.resizableTextArea.textArea.value !== ""
+			inputLocation.current?.resizableTextArea.textArea.value !== "" &&
+			cpu !== null &&
+			cpu !== "" &&
+			ozu !== null &&
+			ozu !== "" &&
+			video !== null &&
+			video !== ""
 		) {
 			dispatch(
 				createNewComputer({
@@ -29,6 +38,9 @@ const NewCompModal = ({ isModalOpen, setIsModalOpen }) => {
 						inputLocation.current?.resizableTextArea.textArea.value,
 					status: "Свободен",
 					RentTime: "-",
+					cpu: cpu.current?.resizableTextArea.textArea.value,
+					ozu: ozu.current?.resizableTextArea.textArea.value,
+					video: video.current?.resizableTextArea.textArea.value,
 				})
 			);
 		} else {
@@ -57,6 +69,18 @@ const NewCompModal = ({ isModalOpen, setIsModalOpen }) => {
 			<p className={styles.inputBlock}>
 				Где будет находиться космпьютер?
 				<TextArea ref={inputLocation} rows={1} />
+			</p>
+			<p className={styles.inputBlock}>
+				Какой процессор?
+				<TextArea ref={cpu} rows={1} />
+			</p>
+			<p className={styles.inputBlock}>
+				Сколько оп. памяти?
+				<TextArea ref={ozu} rows={1} />
+			</p>
+			<p className={styles.inputBlock}>
+				Какая видеокарта?
+				<TextArea ref={video} rows={1} />
 			</p>
 		</Modal>
 	);

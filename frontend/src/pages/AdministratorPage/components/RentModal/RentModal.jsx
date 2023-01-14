@@ -56,6 +56,9 @@ const RentModal = ({ isModalOpen, setIsModalOpen }) => {
 					information: computers[compId - 1].information,
 					RentTime: rentTime,
 					location: computers[compId - 1].location,
+					cpu: computers[compId - 1].cpu,
+					ozu: computers[compId - 1].ozu,
+					video: computers[compId - 1].video,
 				})
 			);
 			const rentPrice =
@@ -86,6 +89,7 @@ const RentModal = ({ isModalOpen, setIsModalOpen }) => {
 			onCancel={handleCancel}
 			okText={"Готово"}
 			cancelText={"Отмена"}
+			destroyOnClose={true}
 		>
 			<p className={styles.inputBlockNum}>
 				Выберете id компьютера

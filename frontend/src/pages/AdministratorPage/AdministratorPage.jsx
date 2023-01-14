@@ -103,6 +103,10 @@ const AdministratorPage = () => {
 								alt="computer"
 							/>
 							<div>Номер компьютера: {item.id}</div>
+							<div>Находится: {item.location}</div>
+							<div>Процессор: {item.cpu}</div>
+							<div>ОЗУ: {item.ozu}</div>
+							<div>Видеокарта: {item.video}</div>
 							<div>
 								Статус:{" "}
 								{IsTimeLost(item.RentTime) ? (

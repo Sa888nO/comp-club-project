@@ -64,6 +64,9 @@ class Computer(Base):
     information = db.Column(db.String(200), nullable=False)
     location = db.Column(db.String(200), nullable=False)
     RentTime = db.Column(db.String(200), nullable=False)
+    cpu = db.Column(db.String(200), nullable=False)
+    ozu = db.Column(db.String(200), nullable=False)
+    video = db.Column(db.String(200), nullable=False)
 
 class User(Base):
     __tablename__ = "Users"

@@ -216,6 +216,9 @@ def get_сomputer_list():
             'information': сomputerItem.information, 
             'location': сomputerItem.location,
             'RentTime': сomputerItem.RentTime,
+            'cpu': сomputerItem.cpu, 
+            'ozu': сomputerItem.ozu,
+            'video': сomputerItem.video,
         })
     return jsonify(serialized)
 
